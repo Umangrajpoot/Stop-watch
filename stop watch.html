@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            width: 100%;
+            height:400px;
+            background-color: black;
+            color:white;
+            text-align: center;
+        }
+        #stopwatch{
+            font-size: 100px;
+        }
+        button{
+           font-size: 30px;
+           margin: 5px;
+           border-width: 6px; 
+           border-radius: 6px;
+           cursor: pointer; 
+        }
+        button:hover{
+            background-color: cadetblue;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="stopwatch">00:00:00</div>
+        <button id="start" onclick="startTimer()">Start</button>
+        <button id="stop" onclick="stopTimer()">Stop</button>
+        <button id="reset" onclick="resetTimer()">Reset</button>
+    </div>
+    <script>
+        
+        let hr=0;
+        let min=0;
+        let sec=0;
+        let flag=false;
+        
+        function startTimer(){
+            if(flag==false){
+                flag=true;
+                timer();
+            }
+        }
+        function stopTimer(){
+            if(flag==true){
+                flag=false;
+            }
+        }
+        function resetTimer(){
+            sec= 0;
+            min=0;
+            hr=0;
+            flag=false;
+            document.getElementById("stopwatch").innerHTML = "00:00:00";
+
+        }
+        function timer(){
+            if(flag==true){
+                sec=parseInt(sec);
+                min = parseInt(min);
+                hr=parseInt(hr);
+
+                  sec=sec+1;
+                  if(sec==60){
+                      min = min+1;
+                      sec=0;
+                  }
+            if(min==60){
+                hr=hr+1;
+                min=0;
+                sec=0;
+            }
+            if(sec<10)
+            {
+                sec = "0" +sec;
+            }
+            if(min<10)
+            {
+                min = "0" + min;
+            }
+            if(hr<10)
+            {
+                hr = "0" + hr;
+            }
+            document.getElementById("stopwatch").innerHTML = hr + ":" + min + ':' + sec;
+            setTimeout("timer()",100);
+        }
+    }
+    </script>
+<!-- stopTimer = false //StopWatch is running -->
+<!-- stopTimer = true //StopWatch is not running(stopped) -->
+
+
+</body>
+</html>
